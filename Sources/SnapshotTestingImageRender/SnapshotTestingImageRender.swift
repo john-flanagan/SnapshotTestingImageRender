@@ -13,7 +13,10 @@ extension Snapshotting where Value: SwiftUI.View, Format == UIImage {
   public static var imageRender: Snapshotting {
     return .imageRender()
   }
+}
 
+#if os(iOS) || os(tvOS)
+extension Snapshotting where Value: SwiftUI.View, Format == UIImage {
   /// A snapshot strategy for comparing SwiftUI Views based on pixel equality using iOS 16 `ImageRenderer`.
   ///
   /// `ImageRenderer` output only includes views that SwiftUI renders, such as text, images, shapes,
@@ -106,3 +109,4 @@ private struct TraitsModifier: ViewModifier {
       }
   }
 }
+#endif
